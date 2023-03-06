@@ -1,0 +1,20 @@
+{
+  "name": "test_task_ledgerset",
+  "version": "1.0.0",
+  "description": "Test task for Ledgerset",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm i && npx playwright install --with-deps",
+    "test": "./node_modules/.bin/cucumber-js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexzavg/test_task_ledgerset"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.0.0",
+    "@playwright/test": "^1.30.0",
+    "playwright": "^1.30.0"
+  }
+}
