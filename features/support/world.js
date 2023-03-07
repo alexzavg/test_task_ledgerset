@@ -1,4 +1,4 @@
-const { setWorldConstructor, setDefaultTimeout, BeforeAll, AfterAll } = require('@cucumber/cucumber');
+const { setWorldConstructor, setDefaultTimeout } = require('@cucumber/cucumber');
 const playwright = require('playwright');
 
 class CustomWorld {
@@ -31,7 +31,45 @@ class CustomWorld {
     await this.page.fill('[name="login"]', email);
     await this.page.fill('[name="pass"]', password);
     await this.page.click('[value="Увійти"]');
-    await this.page.waitForTimeout(5000);
+  };
+
+  async waitForPartialUrl(url, options) {
+    const pattern = new RegExp(url);
+    await this.page.waitForURL(pattern, options);
+  };
+
+  async waitForMenuCategory(categoryName) {
+    await this.page.waitForSelector(`.list_underlined >> text=${categoryName}`);
+  };
+
+  async clickMenuItem(itemName) {
+    await this.page.click(`.sn_menu_item >> text=${itemName}`);
+  };
+
+  async selectedMenuItem(itemName) {
+    await this.page.waitForSelector(`.sn_menu_item._current >> text=${itemName}`);
+  };
+
+  async composeEmail(recipientEmail, subject, body) {
+    await this.page.fill('[name="subject"]', subject);
+    await this.page.fill('#to', recipientEmail);
+    await this.page.fill('[name="body"]', body);
+  };
+
+  async sendEmail(buttonText) {
+    await this.page.click(`.send_container.clear >> text=${buttonText}`);
+  };
+
+  async checkEmailSentMessage(text) {
+    await this.page.waitForSelector(`text=${text}`);
+  };
+
+  async selectMailCategory(categoryName) {
+    await this.page.click(`.list_underlined >> text=${categoryName}`);
+  };
+
+  async waitForEmailInList(text) {
+    await this.page.waitForSelector(`#mesgList >> text=${text}`);
   };
 
 };
