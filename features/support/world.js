@@ -53,7 +53,7 @@ class CustomWorld {
   async composeEmail(recipientEmail, subject, body) {
     await this.page.fill('[name="subject"]', subject);
     await this.page.fill('#to', recipientEmail);
-    await this.page.fill('[name="body"]', body);
+    await this.page.fill('#text', body);
   };
 
   async sendEmail(buttonText) {
